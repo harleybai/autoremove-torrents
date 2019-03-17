@@ -1,0 +1,60 @@
+my_task:
+  client: utorrent
+  host: http://127.0.0.1:17890
+  username: admin
+  password: password
+  strategies:
+    my_strategy:
+      excluded_status:
+        - Downloading
+      maximum_number:
+        max_num: 212
+        sort_type: remove-big-ratio-first
+  delete_data: true
+
+
+# Example
+# my_task:
+#   client: utorrent
+#   host: http://127.0.0.1:17890
+#   username: admin
+#   password: password
+#   strategies:
+#     my_strategy:
+#       # 过滤: categories trackers status (使用相应过滤方式才进行配置)
+# ---------------------------------------
+#       categories: #属于该范围内的标签保留，进行下一步过滤，并不会删除
+#         - TTG
+#         - npu
+#       excluded_categories:
+#         - 6V
+# ---------------------------------------
+#       trackers:
+#         -
+#       excluded_trackers:
+#         -
+# ---------------------------------------
+#       status:
+#         -
+#       excluded_status:
+#         - Downloading
+# ---------------------------------------
+#       # 删除条件: 'ratio', 'seed_size', 'maximum_number' (使用相应删除方式才进行配置)
+#       ratio: 1              # 大于该分享率的删除
+#       seed_size:            # 删除后所有种子体积加起来不大于500G，优先删除方式通过sort_type配置
+#          max_size: 500
+#          sort_type: remove-big-ratio-first
+#       maximum_number:       # 删除后所有种子数量加起来等于210，优先删除方式通过sort_type配置
+#         max_num: 210
+#         sort_type: remove-big-ratio-first
+#   delete_data: true
+
+# status: 'Downloading', 'Uploading', 'Checking', 'Queued', 'Paused', 'Stopped', 'Unknown'
+
+# sort_type:
+#  'remove-old-seeds-first'
+#  'remove-new-seeds-first'
+#  'remove-big-size-first'
+#  'remove-small-size-first'
+#  'remove-big-ratio-first'
+#  'remove-small-ratio-first'
