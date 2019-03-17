@@ -2,14 +2,12 @@ Auto Remove Torrents
 ======================
 By modifying project: https://github.com/jerrymakesjelly/autoremove-torrents
 
-Requirements
--------------
+####Requirements
 * Python 3
 
 That's all. It's a simple but smart program.
 
-Quick Start
--------------
+####Quick Start
 #####Download
 
     git clone https://github.com/harleybai/autoremove-torrents.git
