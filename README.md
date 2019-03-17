@@ -1,5 +1,5 @@
-Auto Remove Torrents
-======================
+##Auto Remove Torrents
+
 By modifying project: https://github.com/jerrymakesjelly/autoremove-torrents
 
 ####Requirements
@@ -37,6 +37,7 @@ Example:
 
       
 #####RUN
+
     autoremove-torrents [-v] [-c=configfilepath] [-t=taskname]
     -v : not delete torrent or data, for viewing result
     -c : the path of config.yml, default for current directory
