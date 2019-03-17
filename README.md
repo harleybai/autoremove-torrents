@@ -1,19 +1,19 @@
-##Auto Remove Torrents
+## Auto Remove Torrents
 By modifying project: https://github.com/jerrymakesjelly/autoremove-torrents
 
-#####Requirements
+### Requirements
 * Python 3
 
 That's all. It's a simple but smart program.
 
-####Quick Start
+### Quick Start
 
-**Download**
+#### Download
 
     git clone https://github.com/harleybai/autoremove-torrents.git
     cd autoremove-torrents
 
-**Write your configuration file**
+#### Write your configuration file
 
 In order to satisfactory your needs, you have to learn how to write a configuration file. 
 
@@ -36,7 +36,7 @@ Example:
 
 
       
-**RUN**
+#### RUN
 
     autoremove-torrents [-v] [-c=configfilepath] [-t=taskname]
     -v : not delete torrent or data, for viewing result
