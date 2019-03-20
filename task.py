@@ -45,6 +45,7 @@ class Task(object):
 
         # Torrents
         self._torrents = []
+        self._torrents_backup = []
         self._remove = []
 
         # Allow removing specified torrents
@@ -93,6 +94,7 @@ class Task(object):
                 self._logger.info('Please wait...We have found %d seed(s).' %
                                   len(self._torrents))
                 last_time = time.time()
+        self._torrents_backup = self._torrents
         self._logger.info('Found %d seed(s) in the client.' % len(self._torrents))
 
     # Apply strategies
@@ -106,7 +108,7 @@ class Task(object):
 
     # Remove torrents
     def _remove_torrents(self):
-        save_history(self._remove)
+        save_history(self._remove, self._torrents_backup)
         for torrent in self._remove:
             if self._delete_data:
                 self._client.remove_data(torrent.hash)

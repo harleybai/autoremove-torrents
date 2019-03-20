@@ -19,7 +19,7 @@
 <body>
 
 <div class="container">
-    <div class="jumbotron">
+    <div class="jumbotron text-center">
         <h2>Auto Remove Torrents History</h2>
     </div>
     <div id="history_div"></div>
@@ -28,7 +28,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $.get('/data', function (data) {
-            var lists = JSON.parse(data);
+            var info = JSON.parse(data);
+            console.log(info["info"]);
+            $('div.jumbotron').append('<div class="alert alert-success text-center">' +
+                'Torrent Num: <strong>' + info["info"]["num"] + '</strong>' +
+                '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Torrent Size: <strong>' + info["info"]["size"] + '</strong>' +
+                '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Torrent Upload: <strong>' + info["info"]["upload"] + '</strong></div>');
+            var lists = info["history"];
             for (var i = 0; i < lists.length; ++i) {
                 var str_class = (i == 0) ? 'collapse show' : 'collapse';
                 var str_list = '<div class="card"><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse' + i + '">';
