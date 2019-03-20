@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auto Remove Torrents History</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="#"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <style>
+        .jumbotron {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <h2>Auto Remove Torrents History</h2>
+    </div>
+    <div id="history_div"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.get('/data', function (data) {
+            var lists = JSON.parse(data);
+            for (var i = 0; i < lists.length; ++i) {
+                var str_class = (i == 0) ? 'collapse show' : 'collapse';
+                var str_list = '<div class="card"><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse' + i + '">';
+                str_list += lists[i].time + " [Removed <b>" + lists[i].num + "</b> Torrents]";
+                str_list += '</a></div><div id="collapse' + i + '" class="' + str_class + '" data-parent="#history_div"><div class="card-body">';
+                if (lists[i].num == 0) {
+                    str_list += lists[i].time + " [Removed <b>" + lists[i].num + "</b> Torrents]";
+                } else {
+                    str_list += '<ul class="list-unstyled"><ul>';
+                    for (var j = 0; j < lists[i].num; ++j) {
+                        str_list += '<li>' + lists[i].list[j].replace(/:/g, ': ').replace(/\t+/g, "&nbsp;".repeat(6)) + '</li>';
+                    }
+                    str_list += '</ul></ul>';
+                }
+                str_list += '</div></div></div>';
+                $('div#history_div').append(str_list);
+            }
+        })
+    });
+</script>
+
+</body>
+</html>
