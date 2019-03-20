@@ -3,7 +3,9 @@
 
 import time
 import os
+import _thread
 import sched
+from web import index
 
 schedule = sched.scheduler(time.time, time.sleep)
 
@@ -29,4 +31,9 @@ def main(cmd, inc=60):
 
 
 if __name__ == '__main__':
-    main("python main.py", 7200)
+    try:
+        _thread.start_new_thread(main, ("python main.py", 7200))
+    except:
+        print("Error: unable to start thread")
+    # main("python main.py", 7200)
+    index.web_run()

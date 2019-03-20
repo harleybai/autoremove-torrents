@@ -21,7 +21,7 @@ class Torrent(object):
 
     # Format torrent info
     def __str__(self):
-        return "Size:%s\tRatio:%.3f\tTotal Uploaded:%s\tCategory:%s\tName:%s\n" % \
+        return "Size:%s\tRatio:%.3f\tUploaded:%s\tCategory:%s\tName:%s\n" % \
                (
                    self._convert_bytes(self.size),
                    self.ratio,

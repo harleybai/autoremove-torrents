@@ -12,6 +12,7 @@ from exception.nosuchclient import NoSuchClient
 from strategy import Strategy
 from torrent import Torrent
 from torrentstatus import TorrentStatus
+from removehistory import save_history
 
 
 class Task(object):
@@ -105,6 +106,7 @@ class Task(object):
 
     # Remove torrents
     def _remove_torrents(self):
+        save_history(self._remove)
         for torrent in self._remove:
             if self._delete_data:
                 self._client.remove_data(torrent.hash)
