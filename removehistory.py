@@ -28,7 +28,7 @@ def save_history(torrents, torrents_backup):
     # result of this tile
     result = {
         "info": last_res["info"],
-        "history": [{'time': now, 'num': len(torrents), 'list': []}]
+        "history": [{'time': now, 'num': len(torrents), 'size': 0, 'list': []}]
     }
     # get info
     result["info"]["num"] = len(torrents_backup) - len(torrents)
@@ -40,11 +40,14 @@ def save_history(torrents, torrents_backup):
     # handle remove torrents
     for t in torrents:
         result["info"]["size"] -= t.size
-        result[0]['list'].append(t.__str__())
+        result["history"][0]["size"] += t.size
+        result["history"][0]["list"].append(
+            [convert_bytes(t.size), t.ratio, convert_bytes(t.uploaded), t.category, t.name])
     result["history"].extend(last_res["history"])
     # byte convert
     result["info"]["size"] = convert_bytes(result["info"]["size"])
     result["info"]["upload"] = convert_bytes(result["info"]["upload"])
+    result["history"][0]["size"] = convert_bytes(result["history"][0]["size"])
     # write file
     with open('data.json', 'w', encoding='utf-8') as f:
         json.dump(result, f)

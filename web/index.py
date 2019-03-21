@@ -6,7 +6,7 @@ from removehistory import get_history
 import json
 
 
-def web_run():
+def web_run(host="127.0.0.1", port=17891):
     app = Bottle()
 
     @error(404)
@@ -21,7 +21,7 @@ def web_run():
     def index():
         return json.dumps(get_history())
 
-    run(app, host='localhost', port=17891)
+    run(app, host=host, port=port)
 
 
 if __name__ == '__main__':

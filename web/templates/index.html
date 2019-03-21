@@ -28,28 +28,32 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $.get('/data', function (data) {
+            // Get Data
             var info = JSON.parse(data);
-            console.log(info["info"]);
+            // Add Head Info
             $('div.jumbotron').append('<div class="alert alert-success text-center">' +
                 'Torrent Num: <strong>' + info["info"]["num"] + '</strong>' +
                 '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Torrent Size: <strong>' + info["info"]["size"] + '</strong>' +
                 '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Torrent Upload: <strong>' + info["info"]["upload"] + '</strong></div>');
+            // Add Remove History
             var lists = info["history"];
             for (var i = 0; i < lists.length; ++i) {
                 var str_class = (i == 0) ? 'collapse show' : 'collapse';
                 var str_list = '<div class="card"><div class="card-header"><a class="card-link" data-toggle="collapse" href="#collapse' + i + '">';
-                str_list += lists[i].time + " [Removed <b>" + lists[i].num + "</b> Torrents]";
+                str_list += lists[i].time + " [Removed <b>" + lists[i].num + "</b> Torrents, Removed <b>" + lists[i].size + "</b>]";
                 str_list += '</a></div><div id="collapse' + i + '" class="' + str_class + '" data-parent="#history_div"><div class="card-body">';
-                if (lists[i].num == 0) {
-                    str_list += lists[i].time + " [Removed <b>" + lists[i].num + "</b> Torrents]";
-                } else {
-                    str_list += '<ul class="list-unstyled"><ul>';
-                    for (var j = 0; j < lists[i].num; ++j) {
-                        str_list += '<li>' + lists[i].list[j].replace(/:/g, ': ').replace(/\t+/g, "&nbsp;".repeat(6)) + '</li>';
-                    }
-                    str_list += '</ul></ul>';
+                // Add Table
+                str_list += '<table class="table table-hover table-sm text-center"><thead><th></th><th>Size</th><th>Ratio</th>\<th>Uploaded</th><th>Category</th><th>Name</th></tr></thead><tbody>';
+                for (var j = 0; j < lists[i].num; ++j) {
+                    str_list += '<tr><td>' + j + '</td>' +
+                        '<td>' + lists[i].list[j][0] + '</td>' +
+                        '<td>' + lists[i].list[j][1] + '</td>' +
+                        '<td>' + lists[i].list[j][2] + '</td>' +
+                        '<td>' + lists[i].list[j][3] + '</td>' +
+                        '<td class="text-left">' + lists[i].list[j][4] + '</td></tr>';
                 }
-                str_list += '</div></div></div>';
+                str_list += '</tbody></table></div></div></div>';
+                
                 $('div#history_div').append(str_list);
             }
         })
