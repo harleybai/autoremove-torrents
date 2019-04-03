@@ -32,7 +32,7 @@ def main(cmd, inc=60):
     schedule.run()
 
 
-if __name__ == '__main__':
+def timer_run():
     # Get arguments
     opts = getopt(sys.argv[1:], 'i:h:p:', ['interval=', 'host=', 'port='])[0]
     inc = 7200
@@ -43,7 +43,7 @@ if __name__ == '__main__':
             inc = int(arg)
         elif opt in ('-h', '--host'):
             host = arg
-        elif opt in ('-h', '--host'):
+        elif opt in ('-p', '--port'):
             port = int(arg)
     # Run web
     try:
@@ -52,3 +52,7 @@ if __name__ == '__main__':
         print("Error: unable to start thread")
     # Run
     main("python main.py", inc)
+
+
+if __name__ == '__main__':
+    timer_run()

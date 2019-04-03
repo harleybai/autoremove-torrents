@@ -8,7 +8,7 @@ my_task:
       excluded_status:
         - Downloading
       maximum_number:
-        max_num: 212
+        max_num: 2000
         sort_type: remove-big-ratio-first
   delete_data: true
 
