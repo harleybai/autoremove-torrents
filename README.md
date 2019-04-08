@@ -3,6 +3,13 @@ By modifying project: https://github.com/jerrymakesjelly/autoremove-torrents
 
 ### Requirements
 * Python 3
+* Modules
+```
+pip install pyyaml
+pip install bottle
+pip install requests
+...
+```
 
 That's all. It's a simple but smart program.
 
